@@ -243,7 +243,7 @@ class Dock(QtWidgets.QWidget):
         self.sigClosed.emit(self)
 
     def __repr__(self):
-        return "<Dock %s %s>" % (self.name(), self.stretch())
+        return f"<Dock {self.name()} {self.stretch()}>"
 
     def dragEnterEvent(self, *args):
         self.dockdrop.dragEnterEvent(*args)
