@@ -262,7 +262,7 @@ class DockLabel(VerticalLabel):
     sigClicked = QtCore.Signal(object, object)
     sigCloseClicked = QtCore.Signal()
 
-    def __init__(self, text, closable=False, fontSize=12, tabColor='#4a5c96'):
+    def __init__(self, text, closable=False, fontSize="12px", tabColor='#4a5c96'):
         self.r = '5px'  # Tab radius
         if isinstance(tabColor, str) and tabColor.startswith('#') and len(tabColor) ==7:
             h = tabColor.lstrip('#')      # Remove #
