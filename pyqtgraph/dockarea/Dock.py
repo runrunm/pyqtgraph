@@ -271,7 +271,9 @@ class DockLabel(VerticalLabel):
         g = self.bg.greenF()
         b = self.bg.blueF()
 
-        if (r*0.299 + g*0.587 + b*0.114) > 186:  # Check tab color luminance and set font color accordingly (black or white)
+        luminance = r*0.299 + g*0.587 + b*0.114  # Luminance value between 0 and 1
+
+        if luminance > 0.7:  # Set font color (black or white) accordingly to background color luminance 
             self.fg = mkColor('k')
         else:
             self.fg = mkColor('w')
