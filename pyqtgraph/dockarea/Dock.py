@@ -263,20 +263,25 @@ class DockLabel(VerticalLabel):
     sigClicked = QtCore.Signal(object, object)
     sigCloseClicked = QtCore.Signal()
 
-    def __init__(self, text, closable=False, fontSize="12px", tabColor='#55B'):
+    def __init__(self, text, closable=False, fontSize="12px", fontColor=None, tabColor=None):
         self.r = '3px'  # Tab radius
-        self.bg = mkColor(tabColor)
 
-        r = self.bg.redF()
-        g = self.bg.greenF()
-        b = self.bg.blueF()
+        # Set specific tab color if specified
+        self.bg = mkColor(tabColor) if tabColor else mkColor("#55B")
 
-        luminance = r*0.299 + g*0.587 + b*0.114  # Luminance value between 0 and 1
-
-        if luminance > 0.7:  # Set font color (black or white) accordingly to background color luminance 
-            self.fg = mkColor('k')
+        # Set specific font color if specified
+        if fontColor:
+            self.fg = mkColor(fontColor)
         else:
-            self.fg = mkColor('w')
+            # Check tabColor luminance 
+            r = self.bg.redF()
+            g = self.bg.greenF()
+            b = self.bg.blueF()
+
+            luminance = r*0.299 + g*0.587 + b*0.114  # Luminance value between 0 and 1
+
+            # Set font color (black or white) according to background color luminance
+            self.fg = mkColor('k') if luminance > 0.7 else mkColor('w')
         
         self.dim = False
         self.fixedWidth = False
